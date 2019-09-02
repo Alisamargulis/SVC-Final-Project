@@ -69,7 +69,7 @@ public class FunctionalityTestCase1_2  {
 	@DisplayName("Test case- Play wrong answers")
 	public void testFuncPlayWrong() throws Exception {
 		System.out.println("Start repeated test wrong answer " + (setupIndex-4));
-		QandA.setSanity(); // set Q&A basic
+//		QandA.setSanity(); // set Q&A basic
 		QandA.setGame1(setupIndex); //Set Q&A arrays for test
 		String mark="null";
 		QandA.setAllRightQA();
@@ -83,6 +83,7 @@ public class FunctionalityTestCase1_2  {
 		}
 		System.out.println("End of repeat test :" + (setupIndex-4) + " Expected: Failed, Actual: "+ mark);
 		assertEquals("Failed",mark);
+		
 	}	
 
 	

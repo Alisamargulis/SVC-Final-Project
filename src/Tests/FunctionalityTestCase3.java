@@ -16,9 +16,10 @@ import Main.QandA;
 @TestMethodOrder(OrderAnnotation.class)
 
 public class FunctionalityTestCase3 extends Methods{
+
 	@BeforeAll
-	public static void openChromeDriver() throws Exception {//Setup Chrome + start Trivia web page
-		System.out.println("<--------Start functionality test case 3: Back button + Check radio buttons--------->");
+	//Setup Chrome and start Trivia web page
+	public static void openChromeDriver() throws Exception {
 		setUpChrome();
 		openTrivia();
 		clickStartBtn();
@@ -26,8 +27,7 @@ public class FunctionalityTestCase3 extends Methods{
 	}
 
 	@AfterAll
-	public static void closeChromeDriver() throws InterruptedException {
-		System.out.println("<--------Finish functionality test case 3: Back button + Check radio buttons--------->");
+	public static void disposeBrowser() {
 		closeDriver();
 	}
 
@@ -60,7 +60,7 @@ public class FunctionalityTestCase3 extends Methods{
 		insertQuestion(1);// Next to answer page 2
 		assertTrue(Methods.elementAvailiable("question number: 2")); 
 	}
-	
+
 	@Test
 	@Order(4)
 	@DisplayName("4) Check radio buttons- answer page 2")
@@ -88,7 +88,7 @@ public class FunctionalityTestCase3 extends Methods{
 		assertTrue(elementAvailiable("question number: 2")); //answers page 2 opens
 		clickNextBtn();	// Open question 3
 	}
-	
+
 	@Test
 	@Order(7)
 	@DisplayName("7) Check radio buttons- answer page 3")
@@ -114,4 +114,17 @@ public class FunctionalityTestCase3 extends Methods{
 		QandA.chooseCorrectAnswer(2);
 		assertTrue(elementAvailiable("You finished to build the test - lets play!!"));
 	}
+
+	@Test
+	@Order(10)
+	@DisplayName("10) Quit button")
+	void quitBtn1() throws Exception  {
+		assertTrue(quitBtn(),"Quit button : ");
+	}
+
+
+
 }
+
+
+
