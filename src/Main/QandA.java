@@ -58,7 +58,6 @@ public class QandA {
 
 
 	//Check the correct answer radio button after submit answers
-
 	public static void chooseCorrectAnswer(int i) throws Exception   {   
 		WebElement [] answerEle=Elements.selectRadioButtonElement();
 		switch (correctAnswer[i]) {
@@ -94,8 +93,8 @@ public class QandA {
 		}
 		Methods.clickNextBtn();
 	}	
-	//Set Q&A for sanity test 
 	
+	//Set Q&A for sanity test 
 	public static void setSanity() {
 		String [] question= {"a","b","c"};
 		String [] answer = {"a", "b","c","d"};
@@ -104,7 +103,6 @@ public class QandA {
 	}
 
 	//Input for creating Question and Answer pages, correct or wrong answers
-	
 	public static void setGame1(int setupIndex) { 
 		switch(setupIndex) {
 
@@ -182,20 +180,22 @@ public class QandA {
 			break;
 		}
 	}
-	// Submit all 3 questions & answers + choose the right answer
-
+	
+	// Submit all 3 questions & answers and choose the right answer
 		public static void setAllRightQA() throws Exception{
-			Methods.insertQuestion(0);
+			
+			for(int i=0; i<3; i++) {			
+			Methods.insertQuestion(i);
 			Methods.insertAnswers();
-			chooseCorrectAnswer(0);
-
-			Methods.insertQuestion(1);
-			Methods.insertAnswers();
-			chooseCorrectAnswer(1);
-
-			Methods.insertQuestion(2);
-			Methods.insertAnswers();
-			chooseCorrectAnswer(2);
+			chooseCorrectAnswer(i);
+			}
+//			Methods.insertQuestion(1);
+//			Methods.insertAnswers();
+//			chooseCorrectAnswer(1);
+//
+//			Methods.insertQuestion(2);
+//			Methods.insertAnswers();
+//			chooseCorrectAnswer(2);
 			Methods.elementAvailiable("Play");
 			Methods.playBtn();	
 		}

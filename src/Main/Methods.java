@@ -13,29 +13,35 @@ public class Methods {
 	protected static WebDriver driver;
 	protected static String url = "https://svcollegetest.000webhostapp.com/";
 
+	
+	// Open FireFox browser
 	public static void setUpFireFox() {
-		driver= new  FirefoxDriver();
+		driver= new FirefoxDriver();
 	}
 
+	//Open Chrome browser
 	public static void setUpChrome() {
 		driver= new ChromeDriver();
 	}
 
-	public static void openTrivia() {  //Open browser move to the middle
+	// Open URL of Trivia game and move window of browser to the middle
+	public static void openTrivia() {  
 		driver.manage().window().setPosition(new Point(400,0));
 		driver.get(url);
 	}
 
+	// Close browser 
 	public static void closeDriver() {
 		driver.close();
 	}
-
+	
+	// Quit browser
 	public static void tearDown() {
 		driver.quit();
 	}
 
-
-	public static void insertQuestion(int i)  { // Insert Question from array + next button
+	// Insert Question from array of questions and clicking next button
+	public static void insertQuestion(int i)  { 
 		try {
 			driver.findElement(By.xpath("//*[@id=\"myform1\"]/div/div/div/input")).sendKeys(QandA.getQuestion(i));
 		}
@@ -45,6 +51,7 @@ public class Methods {
 		Methods.clickNextBtn();
 	}
 
+	// Insert Answers from array of answers 
 	public static void insertAnswers() throws Exception{
 		WebElement [] answerEleArr=Elements.selectTextBoxAnswerElement();
 		for(int i=0;i<4;i++) {
@@ -52,6 +59,7 @@ public class Methods {
 		}
 	}
 
+	//Check if element is available in current page
 	public static boolean elementAvailiable(String s) { // Check if page contains
 		boolean available=false; 
 		try {
@@ -65,7 +73,8 @@ public class Methods {
 		return available; 
 	}
 
-	public static boolean radioIsChecked() throws Exception { //Check radio buttons unchecked
+	// Check if radio buttons are checked
+	public static boolean radioIsChecked() throws Exception { 
 		WebElement[] radioCheck= Elements.selectRadioButtonElement();
 		boolean	radioBtn=false; ;
 		for(int i=0; i<4;i++) {
@@ -81,10 +90,11 @@ public class Methods {
 		return radioBtn;
 	}
 
+	// Check the result of the Trivia game : Success / Failed
 	public static void resultOfPlayAllCorrect() {
 		String mark="null";
 		try {
-			mark=PlayTrivia.playAllRightAnswers();//Result: string_get success/failed mark
+			mark=PlayTrivia.playAllRightAnswers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
@@ -94,16 +104,28 @@ public class Methods {
 			System.out.println("Test end page - failed");
 		}
 	}
-
+	
+	//Method checks question mark in Trivia game questions 
+	 public static boolean questionMark(WebElement element) {
+		 boolean qMark= false; 
+		 String question= null; 
+		 question=element.getText();
+		 if(question.charAt(question.length()-1)=='?') {
+			 qMark=true; 
+		 }
+		 
+		 return qMark;
+	 }
 
 	// Buttons 
 
-
-	public static void clickStartBtn() {	//Click on start button, open question page
+	// Click start button- opens 1st question page 
+	public static void clickStartBtn() {	
 		driver.findElement(By.id("startB")).click();	
 	}
-
-	public static void clickNextBtn() {	// Click on next button submit Q&A process
+	
+	// Click on next button submit Q&A process
+	public static void clickNextBtn() {	
 		try {
 			driver.findElement(By.id("nextquest")).click();
 		}
@@ -111,11 +133,14 @@ public class Methods {
 			System.out.println("Next button in Q&A submit doesnt work");
 		}
 	}
-	public static void clickNextBtnGame() {	// Click on next button in Trivia game
+	
+	// Click on next button in Trivia game
+	public static void clickNextBtnGame() {	
 		driver.findElement(By.id("btnnext")).click();
 	}
-
-	public static void clickBackBtn() {	// Click on back button sumbit Q&A process
+	
+	// Click on back button submit Q&A process
+	public static void clickBackBtn() {	
 		try {
 			driver.findElement(By.xpath("//*[@id=\"backquest\"]")).click();
 		}
@@ -123,8 +148,19 @@ public class Methods {
 			System.out.println("Back button doesnt work");
 		}
 	}
-
-	public static Boolean playBtn() { //Click on play button 
+	
+	// Click on back button during Trivia game
+		public static void clickBackBtnGame() {	
+			try {
+				driver.findElement(By.xpath("//*[@id=\"btnback\"]")).click();
+			}
+			catch(Exception e) {
+				System.out.println("Back button doesnt work in trivia game");
+			}
+		}
+	
+	//Click on play button and check if page contains one of the questions submitted 
+	public static Boolean playBtn() { 
 		boolean startGame= false;
 		driver.findElement(By.xpath("//*[@id=\"secondepage\"]/center/button[1]")).click();
 		if (driver.getPageSource().contains(QandA.getQuestion(0))||driver.getPageSource().contains(QandA.getQuestion(1))||driver.getPageSource().contains(QandA.getQuestion(2))){
@@ -133,6 +169,7 @@ public class Methods {
 		return startGame; 
 	}
 
+	//Click on Facebook button at the end of the game to share on Facebook
 	public static boolean facebookBtn() {
 		try {
 			driver.findElement(By.xpath("//*[@id=\"fackBook2\"]/img")).click();
@@ -144,6 +181,7 @@ public class Methods {
 		return elementAvailiable("Facebook");
 	}
 
+	//Click on try again button and checks if Trivia game starts over
 	public static Boolean tryAgainBtn() throws Exception {
 		boolean checkPage=false;
 		driver.findElement(By.xpath("//*[@id=\"markpage\"]/center/button[1]")).click();
@@ -152,5 +190,19 @@ public class Methods {
 		}
 		return checkPage;
 	}
+	
+	//Click on quit button and checks if page contains "Trivia"
+		public static Boolean quitBtn() throws Exception {
+			boolean checkPage=true;
+			driver.findElement(By.xpath("//*[@id=\"secondepage\"]/center/button[2]")).click();
+			if (driver.getPageSource().contains("Trivia")){
+				checkPage=false;
+			}
+			return checkPage;
+		}
+	
+	
+	
+	
 }
 

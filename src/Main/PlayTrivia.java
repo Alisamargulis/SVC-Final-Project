@@ -5,37 +5,24 @@ import org.openqa.selenium.WebElement;
 
 public class PlayTrivia extends Methods{
 
-
-	public static String playAllRightAnswers() throws Exception  { // Play trivia game - correct answers
+	//Play Trivia game with all the right answers, choosing answers from correct answers array
+	public static String playAllRightAnswers() throws Exception  { 
 		WebElement answer;
 		answer=driver.findElement(By.xpath("//*[@id=\"2\"]/h3"));
 		for(int i=0;i<3;i++) {
 			if (answer.getText().toString().equals(QandA.getQuestion(i))) {
 				switch (QandA.correctAnswer[i]) {
 				case 1:
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[1]")).click();
-					} catch (NullPointerException e) {
-						e.printStackTrace();}
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[1]")).click();
 					break;
 				case 2:
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[2]")).click();
-					} catch (NullPointerException e) {
-						e.printStackTrace();}
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[2]")).click();
 					break;
 				case 3: 
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[3]")).click();
-					} catch (NullPointerException e) {
-						e.printStackTrace();}
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[3]")).click();
 					break;
 				case 4: 
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[4]")).click();
-					} catch (NullPointerException e) {
-						e.printStackTrace();}
-
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[4]")).click();
 					break;
 				default:
 				}
@@ -93,35 +80,24 @@ public class PlayTrivia extends Methods{
 
 	}
 
+	//Play Trivia game with wrong answers, choosing answers from wrong answers array
 
-	public static String playWrongAnswers() throws Exception  { // // Play trivia game - Wrong answers array
+	public static String playWrongAnswers() throws Exception  { 
 		WebElement answer=driver.findElement(By.xpath("//*[@id=\"2\"]/h3"));
 		for(int i=0;i<3;i++) {
 			if (answer.getText().toString().equals(QandA.getQuestion(i))) {
 				switch (QandA.wrongAnswer[i]) {
 				case 1:
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[1]")).click();
-					} catch (Exception e) {
-						e.printStackTrace();}
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[1]")).click();
 					break;
 				case 2: 
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[2]")).click();
-					} catch (Exception e) {
-						e.printStackTrace();}
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[2]")).click();
 					break;
 				case 3: 
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[3]")).click();
-					} catch (Exception e) {
-						e.printStackTrace();}
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[3]")).click();
 					break;
 				case 4: 
-					try {
-						driver.findElement(By.xpath("//*[@id=\"2\"]/input[4]")).click();
-					} catch (Exception e) {
-						e.printStackTrace();}
+					driver.findElement(By.xpath("//*[@id=\"2\"]/input[4]")).click();
 					break;
 				default:
 				}
